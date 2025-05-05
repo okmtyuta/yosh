@@ -1,0 +1,24 @@
+#!/bin/sh
+
+function greet() {
+  echo "Welcome to yosh"
+}
+function usage() {
+cat <<EOF
+  Usage: command [<options>...] 
+
+      Options:
+        -h|--help   show help
+        reload      reload shell script
+EOF
+}
+function reload() {
+  echo "Reloading shell script"
+  exec $SHELL -l
+}
+
+case "$1" in
+  -h|--help) shift; usage "$@"; exit 0 ;;
+  reload) shift; reload "$@" ;;
+  '') shift; greet "$@" ;;
+esac
